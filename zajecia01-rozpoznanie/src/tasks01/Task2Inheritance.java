@@ -78,7 +78,7 @@ public class Task2Inheritance {
 		System.out.println("the oldest: " + theOldest);
 
 		// Optional?
-		Pracownik theOldestEmployee = listaOsob.stream().filter(Task2Inheritance::isPracownik)// o
+		Pracownik theOldestEmployee = listaOsob.stream().filter(Task2Inheritance::isPracownik)  // o
 																								// ->
 																								// o
 																								// instanceof
