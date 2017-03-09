@@ -147,6 +147,7 @@ public class Task2Inheritance {
 		return o instanceof Pracownik;
 	}
 
+	@SuppressWarnings("serial")
 	static class PracownikNotFoundException extends RuntimeException {
 
 	}

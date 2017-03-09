@@ -1,6 +1,8 @@
 package vehicles;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.stream.Collectors;
 
 public class Pojazd {
 	
@@ -50,7 +52,15 @@ public class Pojazd {
 	public void setListaNapraw(ArrayList<Naprawa> listaNapraw) {
 		this.listaNapraw = listaNapraw;
 	}
+	
+	public double wartoscNapraw(){
+		return listaNapraw.stream().collect(Collectors.summingDouble(Naprawa::getKoszt));
+	}
 
+	public Naprawa najdrozszaNaprawa(){
+		return Collections.max(listaNapraw, (n1,n2)->Double.compare(n1.getKoszt(), n2.getKoszt()));
+	}
+	
 	@Override
 	public String toString() {
 		return "Pojazd [marka=" + marka + ", model=" + model + ", moc=" + moc + ", napraw=" + listaNapraw.size() + "]";

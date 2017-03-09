@@ -1,20 +1,20 @@
 package vehicles;
 
-import java.math.BigDecimal;
-
 public class Naprawa {
 	
 	private String data;
 	private String miejsce;
-	private BigDecimal koszt;
-	private BigDecimal przebieg;
+	private Double koszt;
+	private Double przebieg;
+	private Pojazd pojazd;
 	
-	public Naprawa(String data, String miejsce, BigDecimal koszt, BigDecimal przebieg) {
-		super();
+	public Naprawa(String data, String miejsce, Double koszt, Double przebieg, Pojazd pojazd) {
 		this.data = data;
 		this.miejsce = miejsce;
 		this.koszt = koszt;
 		this.przebieg = przebieg;
+		this.pojazd=pojazd;
+		this.pojazd.dodajNaprawe(this);
 	}
 
 	public String getData() {
@@ -33,20 +33,29 @@ public class Naprawa {
 		this.miejsce = miejsce;
 	}
 
-	public BigDecimal getKoszt() {
+	public Double getKoszt() {
 		return koszt;
 	}
 
-	public void setKoszt(BigDecimal koszt) {
+	public void setKoszt(Double koszt) {
 		this.koszt = koszt;
 	}
 
-	public BigDecimal getPrzebieg() {
+	public Double getPrzebieg() {
 		return przebieg;
 	}
 
-	public void setPrzebieg(BigDecimal przebieg) {
+	public void setPrzebieg(Double przebieg) {
 		this.przebieg = przebieg;
 	}
+
+	public Pojazd getPojazd() {
+		return pojazd;
+	}
+
+	public void setPojazd(Pojazd pojazd) {
+		this.pojazd = pojazd;
+	}
+	
 	
 }
