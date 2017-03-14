@@ -64,11 +64,15 @@ public class Main {
 		);//
 
 		// Pacjent z najwieksza liczba wizyt (Marek Szczepanski - 8 wizyt)
-		Patient maxVisits = visits.stream().map(Visit::getPatient).distinct().max((a1,a2)->a1.getVisits().size()-a2.getVisits().size()).get();
+		Patient maxVisits = visits.stream()//
+				.map(Visit::getPatient).distinct()//
+				.max((a1,a2)->a1.getVisits().size()-a2.getVisits().size()).get();
 		System.out.println(maxVisits);
 		
 		// Lekarz z najwieksza liczba wizyt: (Genowefa Sercowa - 8 wizyt)
-		MedicalDoctor maxVisitsMd = visits.stream().map(Visit::getDoctor).distinct().max((b1,b2)->b1.getVisits().size()-b2.getVisits().size()).get();
+		MedicalDoctor maxVisitsMd = visits.stream()//
+				.map(Visit::getDoctor).distinct()//
+				.max((b1,b2)->b1.getVisits().size()-b2.getVisits().size()).get();
 		System.out.println(maxVisitsMd);
 		
 		// zestawienie: specjalizacja -> ilosc pacjentow
@@ -77,21 +81,26 @@ public class Main {
 		// Ginekologia-> 5
 		// Psychiatria-> 6
 		// Kardiologia-> 16
-		Map<String, Long> zestawienieSpecjalizacjaIloscPacjentow = visits.stream().collect(Collectors.groupingBy(p->p.getDoctor().getSpecialization(), Collectors.counting()));
+		Map<String, Long> zestawienieSpecjalizacjaIloscPacjentow = visits.stream()//
+				.collect(Collectors.groupingBy(p->p.getDoctor().getSpecialization(), Collectors.counting()));
 		System.out.println(zestawienieSpecjalizacjaIloscPacjentow);
 
 		// zestawienie: miasto -> liczba pacjentow
 		// Warszawa-> 3
 		// Krakow-> 3
 		// Królestwo Konstaincina-> 1
-		Map<String, Long> zestawienieMiastoLiczbaPacjetnow = visits.stream().map(Visit::getPatient).distinct().collect(Collectors.groupingBy(Patient::getCity, Collectors.counting()));
+		Map<String, Long> zestawienieMiastoLiczbaPacjetnow = visits.stream()//
+				.map(Visit::getPatient).distinct()//
+				.collect(Collectors.groupingBy(Patient::getCity, Collectors.counting()));
 		System.out.println(zestawienieMiastoLiczbaPacjetnow);
 
 		// zestawienie: miasto -> sredni wiek pacjenta w danym miescie
 		// Warszawa-> 36.333333333333336
 		// Krakow-> 34.0
 		// Królestwo Konstaincina-> 31.0
-		Map<String, Double> zestawienieMiastoSredniWiekPacjenta = visits.stream().map(Visit::getPatient).distinct().collect(Collectors.groupingBy(Patient::getCity, Collectors.averagingDouble(Patient::getAge)));
+		Map<String, Double> zestawienieMiastoSredniWiekPacjenta = visits.stream()//
+				.map(Visit::getPatient).distinct()//
+				.collect(Collectors.groupingBy(Patient::getCity, Collectors.averagingDouble(Patient::getAge)));
 		System.out.println(zestawienieMiastoSredniWiekPacjenta);
 		
 		// Zestawienie: specjalizacja, sredni wiek danego pacjenta na wizycie
@@ -108,14 +117,18 @@ public class Main {
 		// Warszawa-> Marek Szczepanski
 		// Krakow-> Anna Kowalska
 		// Królestwo Konstaincina-> Bartek Marczak
-		Map<String, Optional<Patient>> zestawienieMiastoPacjentZMaxWizyt = visits.stream().map(Visit::getPatient).distinct().collect(Collectors.groupingBy(Patient::getCity, Collectors.maxBy((d1,d2)->d1.getVisits().size()-d2.getVisits().size())));
+		Map<String, Optional<Patient>> zestawienieMiastoPacjentZMaxWizyt = visits.stream()//
+				.map(Visit::getPatient).distinct()//
+				.collect(Collectors.groupingBy(Patient::getCity, Collectors.maxBy((d1,d2)->d1.getVisits().size()-d2.getVisits().size())));
 		System.out.println(zestawienieMiastoPacjentZMaxWizyt);
 		
 		// list top3 lekarzy ktorzy mieli najwiecej wizyt
 		// Genowefa Sercowa, 8
 		// Stefan Cipny, 5
 		// Zenon Umierający, 5
-		List<MedicalDoctor> top3 = visits.stream().map(Visit::getDoctor).distinct().sorted((d1, d2)-> d1.getVisits().size()-d2.getVisits().size()).limit(3).collect(Collectors.toList());
+		List<MedicalDoctor> top3 = visits.stream().map(Visit::getDoctor).distinct()//
+				.sorted((d1, d2)-> d1.getVisits().size()-d2.getVisits().size())//
+				.limit(3).collect(Collectors.toList());
 		System.out.println(top3);
 		
 		// Zestawienie wizyt w czerwcu: dzien w miesiacu -> liczba wizyt dla
