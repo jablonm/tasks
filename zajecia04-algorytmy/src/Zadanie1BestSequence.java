@@ -32,7 +32,7 @@ public class Zadanie1BestSequence {
 		}
 
 		int indx = 0;
-		int[] bestSequence = new int[maxEnd + 1];
+		int[] bestSequence = new int[maxEnd + 1 - maxBeginning];
 		for (int j = maxBeginning; j <= maxEnd; j++) {
 			bestSequence[indx] = array[j];
 			indx++;
@@ -44,7 +44,7 @@ public class Zadanie1BestSequence {
 		int[] test = { 1, 2, 300, 1, 2, 3, 4, 1, 2 };
 		int[] wynik = bestSequence(test);
 		 for (int i : wynik) {
-		 System.out.print(i + ", ");
+		 System.out.print(i + " ");
 		 }
 	}
 }
