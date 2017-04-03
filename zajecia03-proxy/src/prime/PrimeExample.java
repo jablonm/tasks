@@ -11,6 +11,12 @@ package prime;
 
 public class PrimeExample {
 	public static void main(String[] args) {
-
+		
+		PrimeNumbers test = new PrimeCache(new PrimeNumbersImpl());
+		
+		System.out.println(test.getPrimes(2, 140));
+		System.out.println(test.getPrimes(10, 20));
+		System.out.println(test.getPrimes(19, 100));
+		System.out.println(test.getPrimes(2, 140));
 	}
 }
