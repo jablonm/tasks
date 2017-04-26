@@ -1,0 +1,2 @@
+snikers;1.59;slodycze,100
+fanta;1.99;napoje;1000
