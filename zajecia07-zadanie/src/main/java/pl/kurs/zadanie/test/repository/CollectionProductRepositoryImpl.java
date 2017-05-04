@@ -15,7 +15,8 @@ public class CollectionProductRepositoryImpl implements ProductRepository {
 		}
 	}
 
-	public List<Product> getAllProducts() {
+	@Override
+	public List<Product> findAllProducts() {
 		return products;
 	}
 

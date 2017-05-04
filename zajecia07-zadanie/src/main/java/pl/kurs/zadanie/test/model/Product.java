@@ -3,11 +3,11 @@ package pl.kurs.zadanie.test.model;
 public class Product {
 
 	private String name;
-	private String price;
+	private Double price;
 	private String category;
 	private String weight;
 
-	public Product(String name, String price, String category, String weight) {
+	public Product(String name, Double price, String category, String weight) {
 		this.name = name;
 		this.price = price;
 		this.category = category;
@@ -22,11 +22,11 @@ public class Product {
 		this.name = name;
 	}
 
-	public String getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
@@ -89,4 +89,8 @@ public class Product {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Product [name=" + name + ", price=" + price + ", category=" + category + ", weight=" + weight + "]";
+	}
 }

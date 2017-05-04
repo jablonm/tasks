@@ -18,12 +18,15 @@ public class FileProductRepositoryImpl implements ProductRepository {
 	}
 
 	public List<Product> findAllProducts() {
-		
+		return products;
+	}
+
+	public FileProductRepositoryImpl() {
 		try (BufferedReader in = new BufferedReader(new FileReader("products.txt"))) {
 			String line = null;
 			while ((line = in.readLine()) != null) {
 				String[] words = line.split(";");
-				Product product = new Product(words[0], words[1], words[2], words[3]);
+				Product product = new Product(words[0], Double.parseDouble(words[1]), words[2], words[3]);
 				if (!products.contains(product)) {
 					this.saveProduct(product);
 				}
@@ -31,8 +34,6 @@ public class FileProductRepositoryImpl implements ProductRepository {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		return products;
 	}
 
 }
