@@ -5,8 +5,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -17,49 +16,14 @@ import javax.swing.JTextArea;
 
 public class BlindFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
-	Map<String,Character> keysValue = new HashMap<String,Character>();
-
-	public String checkValue(Set<Character> keys) {
-		String value = "";
-		for (Character character : keys) {
-			if (keysValue.containsKey(character)) {
-				value += keysValue.get(character);
-			}
-		}
-		return value;
-	}
 	
 	public BlindFrame() {
-
+		LettersDirectory directory = new LettersDirectory();
+		directory.generateBlindDirectory();
+		
 		Set<Character> keys = new TreeSet<>();
 		Set<Character> keysFinal = new TreeSet<>();
-		keysValue.put("s", 'a');
-		keysValue.put("ds", 'b');
-		keysValue.put("js", 'c');
-		keysValue.put("jks", 'd');
-		keysValue.put("ks", 'e');
-		keysValue.put("djs", 'f');
-		keysValue.put("djks", 'g');
-		keysValue.put("dks", 'h');
-		keysValue.put("dj", 'i');
-		keysValue.put("djk", 'j');
-		keysValue.put("fs", 'k');
-		keysValue.put("dfs", 'l');
-		keysValue.put("jfs", 'm');
-		keysValue.put("fjks", 'n');
-		keysValue.put("fks", 'o');
-		keysValue.put("dfjs", 'p');
-		keysValue.put("dfjks", 'q');
-		keysValue.put("dfks", 'r');
-		keysValue.put("dfj", 's');
-		keysValue.put("dfjk", 't');
-		keysValue.put("fls", 'u');
-		keysValue.put("dfls", 'v');
-		keysValue.put("djkl", 'w');
-		keysValue.put("fjls", 'x');
-		keysValue.put("fjkls", 'y');
-		keysValue.put("fkls", 'z');
-		
+
 		JPanel main = new JPanel(new BorderLayout());
 
 		JTextArea area = new JTextArea();
@@ -80,8 +44,9 @@ public class BlindFrame extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
-
+		
 		dictionaryPanel.addKeyListener(new KeyAdapter() {
+			String writing = "";
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if (keys.contains(e.getKeyChar())) {
@@ -89,7 +54,13 @@ public class BlindFrame extends JFrame {
 					System.out.println("puszczono: " + e.getKeyChar());
 				}
 				if (keys.isEmpty()) {
-					System.out.println(checkValue(keysFinal));
+					Optional<Character> letter = directory.findLetter(keysFinal);
+					if (letter.isPresent()) {
+						writing += letter.get().toString();
+					} else {
+						java.awt.Toolkit.getDefaultToolkit().beep();
+					}
+					area.setText(writing);
 					keysFinal.clear();
 				}
 				
@@ -102,7 +73,6 @@ public class BlindFrame extends JFrame {
 					keysFinal.add(e.getKeyChar());
 					System.out.println("wcisnieto: " + e.getKeyChar());
 				}
-				area.setText(area.getText()+e.getKeyChar());
 			}
 		});
 	}
