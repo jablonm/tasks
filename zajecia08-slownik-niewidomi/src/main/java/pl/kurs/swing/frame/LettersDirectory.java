@@ -37,17 +37,20 @@ public class LettersDirectory {
 		this.addLetter(new Letter('x', "fjls"));
 		this.addLetter(new Letter('y', "fjkls"));
 		this.addLetter(new Letter('z', "fkls"));
+		//FJ -> spacja
+		//FD -> ENTER
+		//FS -> backspace
 	}
 
 	public Optional<Character> findLetter(Set<Character> sequence) {
 		Letter searchedLetter = new Letter(toString(sequence));
-
-		if (letters.containsKey(searchedLetter)) {
-			System.out.println("słownik: " + letters.get(searchedLetter));
-			return Optional.of(letters.get(searchedLetter));
-		} else {
-			return Optional.empty();
-		}
+		return Optional.ofNullable(Optional.of(letters.get(searchedLetter))).orElse(Optional.empty());
+//		if (letters.containsKey(searchedLetter)) {
+//			System.out.println("slownik: " + letters.get(searchedLetter));
+//			return Optional.of(letters.get(searchedLetter));
+//		} else {
+//			return Optional.empty();
+//		}
 	}
 
 	private String toString(Set<Character> sequence) {
