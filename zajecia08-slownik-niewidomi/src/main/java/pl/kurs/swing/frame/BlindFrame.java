@@ -16,11 +16,11 @@ import javax.swing.JTextArea;
 
 public class BlindFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
-	
+
 	public BlindFrame() {
 		LettersDirectory directory = new LettersDirectory();
 		directory.generateBlindDirectory();
-		
+
 		Set<Character> keys = new TreeSet<>();
 		Set<Character> keysFinal = new TreeSet<>();
 
@@ -44,9 +44,10 @@ public class BlindFrame extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
-		
+
 		dictionaryPanel.addKeyListener(new KeyAdapter() {
 			String writing = "";
+
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if (keys.contains(e.getKeyChar())) {
@@ -56,14 +57,20 @@ public class BlindFrame extends JFrame {
 				if (keys.isEmpty()) {
 					Optional<Character> letter = directory.findLetter(keysFinal);
 					if (letter.isPresent()) {
-						writing += letter.get().toString();
+						if (letter.get().equals('-')) {
+							if (writing.length() > 0) {
+								writing = writing.substring(0, writing.length() - 1);
+							}
+						} else {
+							writing += letter.get().toString();
+						}
 					} else {
 						java.awt.Toolkit.getDefaultToolkit().beep();
 					}
 					area.setText(writing);
 					keysFinal.clear();
 				}
-				
+
 			}
 
 			@Override

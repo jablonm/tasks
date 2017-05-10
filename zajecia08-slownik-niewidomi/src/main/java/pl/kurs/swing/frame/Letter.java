@@ -22,7 +22,7 @@ public class Letter {
 		for (Character c : sequence.toCharArray()) {
 			sequenceSum += (int)c;
 		}
-		//System.out.println("Utworzono: " + letter + " " + sequence + " " + sequenceSum);
+		System.out.println("Utworzono: " + letter + " " + sequence + " " + sequenceSum);
 	}
 	
 	public Character getLetter() {

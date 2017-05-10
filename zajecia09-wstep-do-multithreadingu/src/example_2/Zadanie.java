@@ -3,8 +3,11 @@ package example_2;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 public class Zadanie {
 	/*
@@ -14,10 +17,11 @@ public class Zadanie {
 	 * 
 	 */
 
-	private static List<String> filesList = new ArrayList<>();
+	//private static List<String> filesList = new ArrayList<>();
+	private static BlockingQueue<String> filesList = new LinkedBlockingQueue<>();
 
 	public static void main(String[] args) throws InterruptedException {
-		FileFinder ff = new FileFinder("E:\\Eclipse_workspace\\EE", "java");
+		FileFinder ff = new FileFinder("/home/miszx/git/tasks", "java", filesList);
 		ff.start();
 		ff.join();
 		VoidFinder vf = new VoidFinder(filesList);
@@ -29,10 +33,12 @@ public class Zadanie {
 	public static class FileFinder extends Thread {
 		private final String path;
 		private final String ext;
+		private static BlockingQueue<String> filesList;
 
-		public FileFinder(String path, String ext) {
+		public FileFinder(String path, String ext, BlockingQueue<String> filesList) {
 			this.path = path;
 			this.ext = ext;
+			this.filesList = filesList;
 		}
 
 		private static void getFilesRecursive(File pFile, String ext) {
@@ -41,8 +47,11 @@ public class Zadanie {
 					getFilesRecursive(files, ext);
 				} else {
 					if (files.getAbsolutePath().endsWith(ext)) {
-						filesList.add(files.getAbsolutePath());
-						//System.out.println(files);
+						try {
+							filesList.put(files.getAbsolutePath());
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
 					}
 				}
 			}
@@ -59,16 +68,16 @@ public class Zadanie {
 
 	public static class VoidFinder extends Thread {
 		private final String SEARCHTEXT = "public static void main";
-		private List<String> files = new ArrayList<>();
-
-		public VoidFinder(List<String> files) {
-			this.files = files;
+		private final BlockingQueue<String> filesList;
+			
+		public VoidFinder(BlockingQueue<String> filesList) {
+			this.filesList = filesList;
 		}
 
 		@Override
 		public void run() {
 			Boolean searchText;
-			for (String file : files) {
+			for (String file : filesList) {
 				searchText = false;
 				try (BufferedReader in = new BufferedReader(new FileReader(file))) {
 					String line = null;

@@ -23,7 +23,7 @@ public class LettersDirectory {
 		this.addLetter(new Letter('j', "djk"));
 		this.addLetter(new Letter('k', "fs"));
 		this.addLetter(new Letter('l', "dfs"));
-		this.addLetter(new Letter('m', "jfs"));
+		this.addLetter(new Letter('m', "fjs"));
 		this.addLetter(new Letter('n', "fjks"));
 		this.addLetter(new Letter('o', "fks"));
 		this.addLetter(new Letter('p', "dfjs"));
@@ -37,6 +37,9 @@ public class LettersDirectory {
 		this.addLetter(new Letter('x', "fjls"));
 		this.addLetter(new Letter('y', "fjkls"));
 		this.addLetter(new Letter('z', "fkls"));
+		this.addLetter(new Letter('-', "af"));
+		this.addLetter(new Letter(' ', "jf"));
+		this.addLetter(new Letter('\n', "df"));
 		//FJ -> spacja
 		//FD -> ENTER
 		//FS -> backspace
@@ -44,13 +47,13 @@ public class LettersDirectory {
 
 	public Optional<Character> findLetter(Set<Character> sequence) {
 		Letter searchedLetter = new Letter(toString(sequence));
-		return Optional.ofNullable(Optional.of(letters.get(searchedLetter))).orElse(Optional.empty());
-//		if (letters.containsKey(searchedLetter)) {
-//			System.out.println("slownik: " + letters.get(searchedLetter));
-//			return Optional.of(letters.get(searchedLetter));
-//		} else {
-//			return Optional.empty();
-//		}
+		//return Optional.ofNullable(Optional.of(letters.get(searchedLetter))).orElse(Optional.empty());
+		if (letters.containsKey(searchedLetter)) {
+			System.out.println("slownik: " + letters.get(searchedLetter));
+			return Optional.of(letters.get(searchedLetter));
+		} else {
+			return Optional.empty();
+		}
 	}
 
 	private String toString(Set<Character> sequence) {
