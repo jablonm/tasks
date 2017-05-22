@@ -3,11 +3,8 @@ package example_2;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
 
 public class Zadanie {
 	/*
@@ -21,9 +18,9 @@ public class Zadanie {
 	private static BlockingQueue<String> filesList = new LinkedBlockingQueue<>();
 
 	public static void main(String[] args) throws InterruptedException {
-		FileFinder ff = new FileFinder("/home/miszx/git/tasks", "java", filesList);
+		FileFinder ff = new FileFinder("E:\\Eclipse_workspace\\EE\\", "java", filesList);
 		ff.start();
-		ff.join();
+		//ff.join();
 		VoidFinder vf = new VoidFinder(filesList);
 		vf.start();
 		//drugi watek odpala sie kiedy ff sie skonczy
@@ -33,7 +30,7 @@ public class Zadanie {
 	public static class FileFinder extends Thread {
 		private final String path;
 		private final String ext;
-		private static BlockingQueue<String> filesList;
+		private BlockingQueue<String> filesList;
 
 		public FileFinder(String path, String ext, BlockingQueue<String> filesList) {
 			this.path = path;
@@ -41,7 +38,7 @@ public class Zadanie {
 			this.filesList = filesList;
 		}
 
-		private static void getFilesRecursive(File pFile, String ext) {
+		private void getFilesRecursive(File pFile, String ext) {
 			for (File files : pFile.listFiles()) {
 				if (files.isDirectory()) {
 					getFilesRecursive(files, ext);
@@ -67,8 +64,8 @@ public class Zadanie {
 	}
 
 	public static class VoidFinder extends Thread {
-		private final String SEARCHTEXT = "public static void main";
-		private final BlockingQueue<String> filesList;
+		private final String SEARCHTEXT = "String";
+		private BlockingQueue<String> filesList;
 			
 		public VoidFinder(BlockingQueue<String> filesList) {
 			this.filesList = filesList;

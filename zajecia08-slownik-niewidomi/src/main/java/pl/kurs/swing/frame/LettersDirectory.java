@@ -38,7 +38,7 @@ public class LettersDirectory {
 		this.addLetter(new Letter('y', "fjkls"));
 		this.addLetter(new Letter('z', "fkls"));
 		this.addLetter(new Letter('-', "af"));
-		this.addLetter(new Letter(' ', "jf"));
+		this.addLetter(new Letter(' ', "fj"));
 		this.addLetter(new Letter('\n', "df"));
 		//FJ -> spacja
 		//FD -> ENTER
