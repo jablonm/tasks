@@ -27,7 +27,7 @@ public class Station {
 	public Station(String name, Set<Zone> zones) {
 		this.name = name;
 		this.zones = zones;
-		System.out.println("Dodano stacjê: " + name);
+		System.out.println("Dodano stacje: " + name);
 	}
 	
 	
