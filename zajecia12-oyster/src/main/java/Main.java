@@ -12,11 +12,20 @@ public class Main {
 		Station hammersmith = new Station("Hammersmith", Sets.newHashSet(new Zone(2)));
 
 		Oyster oyster = new Oyster(new BigDecimal("30"));
-		Ride ride = new Ride(true, holborn);
+		
+		Ride ride = new Ride(holborn, false);
 		oyster.startRide(ride);
-		Ride ride2 = new Ride(true, wimbledon);
+		ride.setStopStation(hammersmith);
+		oyster.stopRide(ride);
+		
+		Ride ride2 = new Ride(wimbledon, true);
 		oyster.startRide(ride2);
 		ride2.setStopStation(hammersmith);
-		oyster.stopRide(ride2, true);
+		oyster.stopRide(ride2);
+		
+		Ride ride3 = new Ride(holborn, false);
+		oyster.startRide(ride3);
+		ride3.setStopStation(earl);
+		oyster.stopRide(ride3);
 	}
 }

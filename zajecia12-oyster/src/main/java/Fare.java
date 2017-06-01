@@ -31,8 +31,10 @@ public class Fare {
 	}
 	
 	public BigDecimal getFares(Station from, Station to, Boolean bus) {
-		if (bus) {
-			return fares.get("bus");
+		if (to == null) { 
+			return fares.get("max");
+		} else if (bus) {
+			return fares.get("max");
 		} else {
 			if (anywhereInZone1(from, to)) {
 				return fares.get("aiz1");

@@ -30,6 +30,4 @@ public class Station {
 		System.out.println("Dodano stacje: " + name);
 	}
 	
-	
- 	
 }

@@ -5,10 +5,19 @@ public class Ride {
 	private Boolean stop;
 	private Station startStation;
 	private Station stopStation;
+	private Boolean bus;
 
-	public Ride(Boolean start, Station startStation) {
-		this.start = start;
+	public Boolean getBus() {
+		return bus;
+	}
+
+	public void setBus(Boolean bus) {
+		this.bus = bus;
+	}
+
+	public Ride(Station startStation, Boolean bus) {
 		this.startStation = startStation;
+		this.bus = bus;
 	}
 
 	public Station getStartStation() {
