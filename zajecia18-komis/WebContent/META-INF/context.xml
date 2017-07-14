@@ -1,0 +1,6 @@
+<Context path="/db" docBase="../../WEB-INF">
+	<Resource name="jdbc/baza" auth="Container" type="javax.sql.DataSource"
+		description="Zajecia Java Przyklad JDBC" driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/dealer" username="root"
+		password="1234" maxActive="10" />
+</Context>

@@ -10,10 +10,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Komis samochodowy</title>
 <script type="text/javascript">
+
 function changeFieldValue(fieldId, newValue, formId){
-	document.getElementById(fieldId).val=newValue;
+	document.getElementById(fieldId).value=newValue;
 	document.getElementById(formId).submit();
 }
+
 </script>
 </head>
 <body>
@@ -21,17 +23,17 @@ function changeFieldValue(fieldId, newValue, formId){
 	<div class="container">
 
 		<ul class="nav nav-tabs">
-			<li class="active"><a data-toggle="tab" href="#home">Strona główna</a></li>
-			<li><a data-toggle="tab" href="#clients">Klienci</a></li>
+			<li <c:if test="${activeTab==null}"> class="active"</c:if>><a data-toggle="tab" href="#home">Strona główna</a></li>
+			<li <c:if test="${activeTab=='clients'}"> class="active"</c:if> ><a data-toggle="tab" href="#clients">Klienci</a></li>
 			<li><a data-toggle="tab" href="#vehicles">Pojazdy</a></li>
 			<li><a data-toggle="tab" href="#transactions">Tranzakcje</a></li>
 			<li><a data-toggle="tab" href="#raports">Raporty</a></li>
 		</ul>
 
 		<div class="tab-content">
-			<div id="home" class="tab-pane fade in active">
+			<div id="home" class="tab-pane fade <c:if test="${activeTab==null}"> in active</c:if>">
 			</div>
-			<div id="clients" class="tab-pane fade">
+			<div id="clients" class="tab-pane fade<c:if test="${activeTab=='clients'}"> in active</c:if> ">
 				<jsp:include page="clients.jsp" />
 			</div>
 			<div id="vehicles" class="tab-pane fade">

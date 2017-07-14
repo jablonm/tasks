@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import service.DomainService;
-import service.impl.ClientService;
+import main.service.DomainService;
+import main.service.impl.ClientService;
 
 @WebServlet("/DealerServlet")
 public class DealerServlet extends HttpServlet {
@@ -27,20 +27,25 @@ public class DealerServlet extends HttpServlet {
 		clientService = new ClientService();
 		//..
 		domains = new HashMap<>();
-		domains.put("client", clientService);
+		domains.put("clients", clientService);
 		//..
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/pages/index.jsp");
-		request.setAttribute("clients", clientService.getAll());
+		try {
+			request.setAttribute("clients", clientService.getAll());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//domain & action
 		//Dispatcher -> przekierowywanie (Front-Controller)
-		domains.get(request.getParameter("domain")).execute(request, response);
+		domains.get(request.getParameter("domain")).executeWithTab(request, response);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/pages/index.jsp");
 		rd.forward(request, response);
 	}

@@ -1,35 +1,43 @@
 package main.model;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
-public class Client {
-	private static final AtomicInteger GENERATOR = new AtomicInteger();
-
+public class Client implements Comparable<Client> {
 	private int id;
 	private String name;
 	private String secondName;
 	private String address;
-	private String tel;
 	private String city;
+	private int tel;
 
-	public Client(String name, String secondName, String address, String tel, String city) {
+	public Client(int id, String name, String secondName, String address, String city, int tel) {
+		this.id = id;
 		this.name = name;
 		this.secondName = secondName;
 		this.address = address;
-		this.tel = tel;
 		this.city = city;
-		this.id = GENERATOR.incrementAndGet();
+		this.tel = tel;
+	}
+
+	public Client(String name, String secondName, String address, String city, int tel) {
+		this.name = name;
+		this.secondName = secondName;
+		this.address = address;
+		this.city = city;
+		this.tel = tel;
 	}
 
 	public int getId() {
 		return id;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name) throws Exception {
 		this.name = name;
 	}
 
@@ -49,11 +57,11 @@ public class Client {
 		this.address = address;
 	}
 
-	public String getTel() {
+	public int getTel() {
 		return tel;
 	}
 
-	public void setTel(String tel) {
+	public void setTel(int tel) {
 		this.tel = tel;
 	}
 
@@ -63,6 +71,11 @@ public class Client {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	@Override
+	public int compareTo(Client o) {
+		return this.compareTo(o);
 	}
 
 }
