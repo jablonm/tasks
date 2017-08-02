@@ -162,7 +162,8 @@
 		</tbody>
 	</table>
 	<form action="DealerServlet" method="post" id="sortClientForm">
-		<input type="hidden" name="domain" value="clients" /> <input type="hidden" name="action" value="sort" /> <input type="hidden"
-			name="orderBy" id="client_sort_by" value="id" />
+		<input type="hidden" name="domain" value="clients" /> 
+		<input type="hidden" name="action" value="sort" /> 
+		<input type="hidden" name="orderBy" id="client_sort_by" value="id" />
 	</form>
 </div>

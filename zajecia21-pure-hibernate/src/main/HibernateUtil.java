@@ -4,8 +4,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
-import com.mysql.fabric.xmlrpc.Client;
-
 import main.model.Product;
 
 public class HibernateUtil {

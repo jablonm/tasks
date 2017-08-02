@@ -1,0 +1,4 @@
+DATA;KLASA;METODA;ARGUMENTY
+2017/07/27 18:21:15;class pl.kurs.spring.aop.printer.impl.FilePrinter;void pl.kurs.spring.aop.printer.impl.PrinterBean.print(String);[test]
+2017/07/27 18:21:15;class pl.kurs.spring.aop.printer.impl.FilePrinter;void pl.kurs.spring.aop.printer.impl.PrinterBean.print(String);[prod]
+2017/07/27 18:21:15;class pl.kurs.spring.aop.printer.impl.ConsolePrinter;void pl.kurs.spring.aop.printer.impl.PrinterBean.print(String);[jakistekst]

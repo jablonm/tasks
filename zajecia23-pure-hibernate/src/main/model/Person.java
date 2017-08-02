@@ -8,7 +8,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 @Entity
-@Inheritance(strategy=InheritanceType.)
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class Person {
 	
 	@Id
